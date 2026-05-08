@@ -1,0 +1,173 @@
+/* GIAO DIỆN GRID KIỂU GOOGLE DRIVE */
+.document-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.doc-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #edf2f7;
+  position: relative;
+}
+
+.doc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+.doc-image-wrapper {
+  height: 150px;
+  background: #f8f9fa;
+  position: relative;
+  cursor: zoom-in;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.doc-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.doc-card:hover .doc-image {
+  transform: scale(1.05);
+}
+
+.zoom-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-weight: bold;
+}
+
+.doc-image-wrapper:hover .zoom-overlay {
+  opacity: 1;
+}
+
+.doc-info {
+  padding: 15px;
+}
+
+.badge-type {
+  background: #3498db;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.doc-title {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.doc-actions {
+  border-top: 1px solid #ecf0f1;
+  padding: 10px 15px;
+  background: #fafafa;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+.btn-icon:hover { transform: scale(1.1); }
+.text-danger { color: #e74c3c; font-size: 16px; }
+
+/* Nút tải xuống */
+.download-btn {
+  background: #ecf0f1;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #2980b9;
+}
+.download-btn:hover {
+  background: #3498db;
+  color: white;
+}
+
+/* LIGHTBOX ZOOM */
+.lightbox-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+}
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 30px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* Upload Area */
+.upload-area {
+  border: 2px dashed #bdc3c7;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  background: #fcfcfc;
+}
+.file-input {
+  margin-top: 10px;
+}
+.preview-container {
+  margin-top: 15px;
+  text-align: center;
+}
+.preview-img {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn-refresh {
+  padding: 8px 15px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; transition: 0.2s;
+}
+.btn-refresh:hover { background: #f1f2f6; }
