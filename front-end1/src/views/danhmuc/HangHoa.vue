@@ -71,7 +71,7 @@ const filteredData = computed(() => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-hoa');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/hang-hoa`);
     const data = await response.json();
     if (data.success) {
       listData.value = data.data;
@@ -93,7 +93,7 @@ const clearFilters = () => {
 const handleDelete = async (ma_hang_hoa) => {
   if (confirm('Bạn có chắc chắn muốn xóa hàng hóa này không?')) {
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/hang-hoa/delete', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/hang-hoa/delete`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

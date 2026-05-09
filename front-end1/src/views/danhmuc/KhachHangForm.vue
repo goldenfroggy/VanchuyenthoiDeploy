@@ -75,7 +75,7 @@ const fetchCustomerDetail = async (id) => {
   isLoadingData.value = true;
   try {
     // Ở đây có thể dùng API chi tiết nếu có, hoặc fetch list rồi tìm theo ID
-    const response = await fetch('${import.meta.env.VITE_API_URL}/khach-hang');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/khach-hang`);
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_khach_hang) === String(id));
@@ -115,7 +115,7 @@ const saveCustomer = async () => {
 
   isSaving.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/khach-hang/save', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/khach-hang/save`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

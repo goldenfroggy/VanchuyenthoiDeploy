@@ -64,7 +64,7 @@ const filteredData = computed(() => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/don-vi-tinh');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/don-vi-tinh`);
     const data = await response.json();
     if (data.success) {
       listData.value = data.data;
@@ -85,7 +85,7 @@ const clearFilters = () => {
 const handleDelete = async (ma_don_vi_tinh) => {
   if (confirm('Bạn có chắc chắn muốn xóa đơn vị tính này không?')) {
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/don-vi-tinh/delete', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/don-vi-tinh/delete`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

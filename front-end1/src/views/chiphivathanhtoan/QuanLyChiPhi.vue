@@ -271,7 +271,7 @@ const viewDetail = (item) => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/chi-phi');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chi-phi`);
     const data = await res.json();
     if (data.success) {
       listChiPhi.value = data.data;
@@ -315,7 +315,7 @@ const saveData = async () => {
   try {
     const payload = { ...formData.value, nguoi_sua_cuoi: userId }; 
     
-    const res = await fetch('${import.meta.env.VITE_API_URL}/chi-phi/save', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chi-phi/save`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
     const data = await res.json();
@@ -328,7 +328,7 @@ const saveData = async () => {
 const handleDelete = async (id) => {
   if (!confirm(`Bạn có chắc muốn xóa khoản chi phí này?`)) return;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/chi-phi/delete', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chi-phi/delete`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ma_chi_phi: id })
     });
     if ((await res.json()).success) fetchData();
@@ -344,7 +344,7 @@ const markAsPaid = async (id) => {
 
   try {
     const today = new Date().toISOString().split('T')[0];
-    const res = await fetch('${import.meta.env.VITE_API_URL}/chi-phi/update-status', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chi-phi/update-status`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, 
       body: JSON.stringify({ 
         ma_chi_phi: id, 

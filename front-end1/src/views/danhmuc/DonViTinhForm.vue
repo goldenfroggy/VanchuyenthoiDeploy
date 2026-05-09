@@ -41,7 +41,7 @@ const formData = ref({
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/don-vi-tinh');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/don-vi-tinh`);
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_don_vi_tinh) === String(id));
@@ -62,7 +62,7 @@ const fetchDetail = async (id) => {
 const saveData = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/don-vi-tinh/save', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/don-vi-tinh/save`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
