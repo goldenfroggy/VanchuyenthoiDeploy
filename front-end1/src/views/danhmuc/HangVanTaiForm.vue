@@ -56,7 +56,7 @@ const formData = ref({
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-van-tai');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-van-tai');
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_hang_van_tai) === String(id));
@@ -81,7 +81,7 @@ const fetchDetail = async (id) => {
 const saveData = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-van-tai/save', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-van-tai/save', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

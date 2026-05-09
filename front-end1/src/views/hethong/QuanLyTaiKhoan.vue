@@ -81,7 +81,7 @@ const filteredAccounts = computed(() => {
 const fetchAccounts = async () => {
   isLoading.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/accounts');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/accounts');
     const data = await response.json();
     if (data.success) {
       listAccounts.value = data.data;
@@ -107,7 +107,7 @@ const handleDelete = async (ma_tai_khoan) => {
   
   if (confirm('Bạn có chắc chắn muốn xóa nhân viên này không?')) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/delete', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/accounts/delete', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

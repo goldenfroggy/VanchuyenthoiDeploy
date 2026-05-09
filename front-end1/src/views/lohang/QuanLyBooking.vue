@@ -237,7 +237,7 @@ watch([searchQuery, filterHangTau, filterCangDi, filterCangDen, dateFilters, pag
 
 const loadReferences = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/bookings/references');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/bookings/references');
     const data = await res.json();
     if (data.success) {
       listCangBien.value = data.cang_bien;
@@ -251,7 +251,7 @@ const loadReferences = async () => {
 const fetchBookings = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/bookings');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/bookings');
     const data = await res.json();
     if (data.success) listBookings.value = data.data;
   } catch (error) {
@@ -266,7 +266,7 @@ const handleDelete = async (id) => {
   const user = JSON.parse(localStorage.getItem('sincere_user'));
   
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/bookings/delete', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/bookings/delete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 

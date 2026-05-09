@@ -123,7 +123,7 @@ const fetchUserProfile = async () => {
   if (!userId) return;
 
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/user-info?ma_tai_khoan=${userId}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user-info?ma_tai_khoan=${userId}`);
     const result = await response.json();
     if (result.success) {
       userData.value = result.data;
@@ -145,7 +145,7 @@ const openEditModal = () => {
 const saveProfile = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/profile/update', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/profile/update', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editData.value)
@@ -182,7 +182,7 @@ const handleChangePassword = async () => {
 
   isSaving.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/profile/change-password', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/profile/change-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

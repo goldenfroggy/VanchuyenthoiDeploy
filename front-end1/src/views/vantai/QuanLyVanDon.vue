@@ -245,7 +245,7 @@ const showShipmentInfo = async (vd) => {
   panelTitle.value = '📦 Thông tin lô hàng: ' + vd.ten_lo_hang;
   isPanelLoading.value = true;
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/lo-hang`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lo-hang`);
     const data = await res.json();
     if (data.success) {
       selectedShipment.value = data.data.find(lh => lh.ma_lo_hang === vd.ma_lo_hang);
@@ -260,13 +260,13 @@ const showShipmentInfo = async (vd) => {
 };
 
 const handlePrintPDF = (id) => {
-  window.open(`http://127.0.0.1:8000/api/van-don/export-pdf/${id}`, '_blank');
+  window.open(`${import.meta.env.VITE_API_URL}/van-don/export-pdf/${id}`, '_blank');
 };
 
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/van-don');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don');
     const data = await res.json();
     if (data.success) listVanDon.value = data.data;
   } catch (error) { console.error("Lỗi lấy dữ liệu Vận đơn!"); }
@@ -275,7 +275,7 @@ const fetchData = async () => {
 
 const fetchReferences = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/van-don/references');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don/references');
     const data = await res.json();
     if (data.success) {
       listCangBien.value = data.cang_bien;
@@ -289,7 +289,7 @@ const handleDelete = async (id) => {
   if (!confirm("Bạn có chắc muốn xóa vận đơn này?")) return;
   const user = JSON.parse(localStorage.getItem('sincere_user'));
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/van-don/delete', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don/delete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ma_van_don: id, nguoi_sua_cuoi: user ? (user.id || user.ma_tai_khoan) : null })

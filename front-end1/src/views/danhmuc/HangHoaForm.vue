@@ -46,7 +46,7 @@ const formData = ref({
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-hoa');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-hoa');
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_hang_hoa) === String(id));
@@ -67,7 +67,7 @@ const fetchDetail = async (id) => {
 const saveData = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-hoa/save', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-hoa/save', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

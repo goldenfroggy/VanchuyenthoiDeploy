@@ -551,7 +551,7 @@ const fetchDetailReferences = async () => {
   if (listHangHoa.value.length > 0 && listDonViTinh.value.length > 0) {
     return;
   }
-  const res = await fetch('http://127.0.0.1:8000/api/chi-tiet-lo-hang/references');
+  const res = await fetch('${import.meta.env.VITE_API_URL}/chi-tiet-lo-hang/references');
   const data = await res.json();
   if (data.success) {
     listHangHoa.value = data.hang_hoa;
@@ -570,11 +570,11 @@ const fetchReferences = async () => {
   const id = route.params.id || '';
   try {
     // 1. Lấy danh sách ID booking hợp lệ (trống hoặc của chính lô hàng này)
-    const resRef = await fetch(`http://127.0.0.1:8000/api/lo-hang/references?ma_lo_hang=${id}`);
+    const resRef = await fetch(`${import.meta.env.VITE_API_URL}/lo-hang/references?ma_lo_hang=${id}`);
     const dataRef = await resRef.json();
 
     // 2. Lấy dữ liệu chi tiết của tất cả booking
-    const resAllBk = await fetch('http://127.0.0.1:8000/api/bookings');
+    const resAllBk = await fetch('${import.meta.env.VITE_API_URL}/bookings');
     const dataAllBk = await resAllBk.json();
 
     if (dataRef.success && dataAllBk.success) {
@@ -591,7 +591,7 @@ const fetchReferences = async () => {
 const fetchDetails = async (ma_lo_hang) => {
   if (!ma_lo_hang) return;
   try {
-    const resDetail = await fetch(`http://127.0.0.1:8000/api/chi-tiet-lo-hang?ma_lo_hang=${ma_lo_hang}`);
+    const resDetail = await fetch(`${import.meta.env.VITE_API_URL}/chi-tiet-lo-hang?ma_lo_hang=${ma_lo_hang}`);
     const dataDetail = await resDetail.json();
     if (dataDetail.success) listDetails.value = dataDetail.data;
   } catch (error) { console.error(error); }
@@ -599,7 +599,7 @@ const fetchDetails = async (ma_lo_hang) => {
 
 const fetchData = async (id) => {
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/lo-hang`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lo-hang`);
     const data = await res.json();
     if (data.success) {
       const found = data.data.find(x => String(x.ma_lo_hang) === String(id));
@@ -621,7 +621,7 @@ const handleSaveStep1 = async () => {
   const user = JSON.parse(localStorage.getItem('sincere_user'));
   formData.value.nguoi_sua_cuoi = user ? (user.id || user.ma_tai_khoan) : null;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/lo-hang/save', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/lo-hang/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData.value)
@@ -661,7 +661,7 @@ const handleSaveAll = async () => {
 
   try {
     // 1. Lưu thông tin Lô hàng (Tab 1) trước
-    const resLH = await fetch('http://127.0.0.1:8000/api/lo-hang/save', {
+    const resLH = await fetch('${import.meta.env.VITE_API_URL}/lo-hang/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData.value)
@@ -678,7 +678,7 @@ const handleSaveAll = async () => {
 
     // 2. Xóa các chi tiết hàng đã được đánh dấu xóa
     for (const ma_ct of listDeletedDetails.value) {
-      await fetch('http://127.0.0.1:8000/api/chi-tiet-lo-hang/delete', {
+      await fetch('${import.meta.env.VITE_API_URL}/chi-tiet-lo-hang/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ma_chi_tiet_lo_hang: ma_ct, nguoi_sua_cuoi: userId }) // Truyền userId khi xóa
@@ -694,7 +694,7 @@ const handleSaveAll = async () => {
         nguoi_sua_cuoi: userId 
       };
       
-      const resCT = await fetch('http://127.0.0.1:8000/api/chi-tiet-lo-hang/save', {
+      const resCT = await fetch('${import.meta.env.VITE_API_URL}/chi-tiet-lo-hang/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(detailPayload)

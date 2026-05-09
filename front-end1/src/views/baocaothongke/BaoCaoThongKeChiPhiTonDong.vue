@@ -124,7 +124,7 @@ const fetchData = async () => {
   isLoading.value = true;
   try {
     const query = new URLSearchParams(filters.value).toString();
-    const res = await fetch(`http://127.0.0.1:8000/api/bao-cao/chi-phi-ton-dong?${query}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/bao-cao/chi-phi-ton-dong?${query}`);
     const data = await res.json();
     if (data.success) {
       listData.value = data.data;

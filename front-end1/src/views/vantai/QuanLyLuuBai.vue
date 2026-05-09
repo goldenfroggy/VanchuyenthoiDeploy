@@ -201,7 +201,7 @@ const showShipmentInfo = async (item) => {
   panelTitle.value = '📦 Thông tin lô hàng: ' + (item.ten_lo_hang || item.ma_lo_hang);
   isPanelLoading.value = true;
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/lo-hang`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lo-hang`);
     const data = await res.json();
     if (data.success) {
       selectedShipment.value = data.data.find(lh => lh.ma_lo_hang === item.ma_lo_hang);
@@ -234,7 +234,7 @@ watch([searchQuery, filterTrangThai, filterCuocVo, filterUser, pageSize], () => 
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/luu-bai');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/luu-bai');
     const data = await res.json();
     if (data.success) listLuuBai.value = data.data;
   } catch (e) { console.error(e); }
@@ -244,7 +244,7 @@ const fetchData = async () => {
 const handleDelete = async (id) => {
   if (!confirm("Xác nhận xóa thông tin này?")) return;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/luu-bai/delete', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/luu-bai/delete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ma_luu_bai: id })

@@ -313,7 +313,7 @@ const showShipmentItems = async (lh) => {
   isPanelLoading.value = true;
   
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/chi-tiet-lo-hang?ma_lo_hang=${lh.ma_lo_hang}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chi-tiet-lo-hang?ma_lo_hang=${lh.ma_lo_hang}`);
     const data = await res.json();
     if (data.success) {
       selectedItems.value = data.data;
@@ -338,21 +338,21 @@ watch([searchQuery, searchItemQuery, filterTrangThai, filterKhachHang, filterInc
 const fetchReferences = async () => {
   try {
     // 1. Lấy danh mục khách hàng
-    const resRef = await fetch('http://127.0.0.1:8000/api/lo-hang/references');
+    const resRef = await fetch('${import.meta.env.VITE_API_URL}/lo-hang/references');
     const dataRef = await resRef.json();
     if (dataRef.success) {
       listKhachHang.value = dataRef.khach_hang;
     }
 
     // 2. Lấy đầy đủ thông tin Booking (bao gồm cảng, hãng tàu, etd, eta...)
-    const resBk = await fetch('http://127.0.0.1:8000/api/bookings');
+    const resBk = await fetch('${import.meta.env.VITE_API_URL}/bookings');
     const dataBk = await resBk.json();
     if (dataBk.success) {
       listBooking.value = dataBk.data;
     }
 
     // 3. Lấy danh mục hàng hóa (phục vụ bộ lọc)
-    const resHH = await fetch('http://127.0.0.1:8000/api/chi-tiet-lo-hang/references');
+    const resHH = await fetch('${import.meta.env.VITE_API_URL}/chi-tiet-lo-hang/references');
     const dataHH = await resHH.json();
     if (dataHH.success) listHangHoa.value = dataHH.hang_hoa;
   } catch (error) {
@@ -363,7 +363,7 @@ const fetchReferences = async () => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/lo-hang');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/lo-hang');
     const data = await res.json();
     if (data.success) listLoHang.value = data.data;
   } catch (error) { console.error("Lỗi lấy dữ liệu Lô hàng!"); }
@@ -374,7 +374,7 @@ const handleDelete = async (id) => {
   if (!confirm("Bạn có chắc muốn xóa lô hàng này?")) return;
   const user = JSON.parse(localStorage.getItem('sincere_user'));
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/lo-hang/delete', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/lo-hang/delete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ma_lo_hang: id, nguoi_sua_cuoi: user ? (user.id || user.ma_tai_khoan) : null })

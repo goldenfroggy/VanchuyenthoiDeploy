@@ -378,8 +378,8 @@ const fetchReferences = async () => {
   try {
     // Gọi đồng thời API references (để lấy danh mục) và API lo-hang (để lấy chi tiết đầy đủ)
     const [resRef, allRes] = await Promise.all([
-      fetch('http://127.0.0.1:8000/api/van-don/references'),
-      fetch('http://127.0.0.1:8000/api/lo-hang')
+      fetch('${import.meta.env.VITE_API_URL}/van-don/references'),
+      fetch('${import.meta.env.VITE_API_URL}/lo-hang')
     ]);
     const dataRef = await resRef.json();
     const allData = await allRes.json();
@@ -408,7 +408,7 @@ const fetchReferences = async () => {
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/van-don');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don');
     const data = await res.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_van_don) === String(id));
@@ -451,7 +451,7 @@ const saveVanDon = async () => {
   }
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/van-don/save', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dataToSend)
@@ -465,7 +465,7 @@ const saveVanDon = async () => {
 
 const handleExportPdf = async (id, soVanDon) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/van-don/export-pdf/${id}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/van-don/export-pdf/${id}`);
     if (!response.ok) {
       const errorData = await response.json(); // Cố gắng lấy thông báo lỗi từ response
       throw new Error(errorData.message || 'Lỗi khi tạo PDF');

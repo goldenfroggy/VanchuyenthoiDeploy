@@ -191,7 +191,7 @@ const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.v
 const fetchData = async () => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/to-khai-hai-quan');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/to-khai-hai-quan');
     const data = await response.json();
     if (data.success) {
       listToKhai.value = data.data;
@@ -210,7 +210,7 @@ const showShipmentInfo = async (tk) => {
   panelTitle.value = '📦 Thông tin lô hàng: ' + (tk.ten_lo_hang || tk.ma_lo_hang);
   isPanelLoading.value = true;
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/lo-hang`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lo-hang`);
     const data = await res.json();
     if (data.success) {
       selectedShipment.value = data.data.find(lh => lh.ma_lo_hang === tk.ma_lo_hang);
@@ -243,7 +243,7 @@ watch([searchFilters, pageSize], () => {
 const handleDelete = async (id) => {
   if (confirm('Bạn có chắc chắn muốn xóa tờ khai này không?')) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/to-khai-hai-quan/delete', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/to-khai-hai-quan/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ma_to_khai_hai_quan: id })

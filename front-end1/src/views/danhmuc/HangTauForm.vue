@@ -74,7 +74,7 @@ const formData = ref({
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-tau');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-tau');
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_hang_tau) === String(id));
@@ -114,7 +114,7 @@ const saveData = async () => {
 
   isSaving.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-tau/save', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-tau/save', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

@@ -72,7 +72,7 @@ const filteredData = computed(() => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/cang-bien');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/cang-bien');
     const data = await response.json();
     if (data.success) {
       listData.value = data.data;
@@ -94,7 +94,7 @@ const clearFilters = () => {
 const handleDelete = async (ma_cang) => {
   if (confirm('Bạn có chắc chắn muốn xóa kho cảng này không?')) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/cang-bien/delete', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/cang-bien/delete', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

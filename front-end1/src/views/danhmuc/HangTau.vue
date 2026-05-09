@@ -100,7 +100,7 @@ const filteredData = computed(() => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/hang-tau');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/hang-tau');
     const data = await response.json();
     if (data.success) {
       listData.value = data.data;
@@ -115,7 +115,7 @@ const fetchData = async () => {
 
 const fetchAccounts = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/accounts');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/accounts');
     const data = await response.json();
     if (data.success) {
       accountOptions.value = data.data;
@@ -138,7 +138,7 @@ const clearFilters = () => {
 const handleDelete = async (ma_hang_tau) => {
   if (confirm('Bạn có chắc chắn muốn xóa hãng tàu này không?')) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/hang-tau/delete', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/hang-tau/delete', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

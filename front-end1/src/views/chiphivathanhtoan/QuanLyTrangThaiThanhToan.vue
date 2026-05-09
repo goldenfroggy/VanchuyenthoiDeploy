@@ -252,7 +252,7 @@ const filteredList = computed(() => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/trang-thai-thanh-toan');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/trang-thai-thanh-toan');
     const data = await res.json();
     if (data.success) {
       listChiPhi.value = data.data;
@@ -293,7 +293,7 @@ const submitPayment = async () => {
 
   isSaving.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/trang-thai-thanh-toan/update-status', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/trang-thai-thanh-toan/update-status', {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' }, 
       body: JSON.stringify({ 

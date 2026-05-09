@@ -154,7 +154,7 @@ const viewDetail = (type, item) => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/lenh-giao-hang');
+    const res = await fetch('${import.meta.env.VITE_API_URL}/lenh-giao-hang');
     const data = await res.json();
     if (data.success) {
       listBBGN.value = data.data_bbgn; // Chỉ hứng data BBGN
@@ -182,7 +182,7 @@ const saveData = async () => {
   isSaving.value = true;
   try {
     const payload = { ...formData.value, loai: 'BBGN' }; // Gắn cứng loại BBGN
-    const res = await fetch('http://127.0.0.1:8000/api/lenh-giao-hang/save', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/lenh-giao-hang/save', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
     if ((await res.json()).success) { isModalOpen.value = false; fetchData(); }
@@ -192,7 +192,7 @@ const saveData = async () => {
 const handleDelete = async (id) => {
   if (!confirm(`Hủy vĩnh viễn phiếu này?`)) return;
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/lenh-giao-hang/delete', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/lenh-giao-hang/delete', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ma_phieu: id, loai: 'BBGN' })
     });
     if ((await res.json()).success) fetchData();
@@ -201,7 +201,7 @@ const handleDelete = async (id) => {
 
 const downloadPDF = async (id) => {
   try {
-    const url = `http://127.0.0.1:8000/api/lenh-giao-hang/export-pdf?id=${id}&loai=BBGN`;
+    const url = `${import.meta.env.VITE_API_URL}/lenh-giao-hang/export-pdf?id=${id}&loai=BBGN`;
     const response = await fetch(url);
     if (!response.ok) throw new Error('Network error');
     const blob = await response.blob();

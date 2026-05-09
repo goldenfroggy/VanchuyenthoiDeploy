@@ -100,7 +100,7 @@ const filteredCustomers = computed(() => {
 const fetchCustomers = async () => {
   isLoading.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/khach-hang');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/khach-hang');
     const data = await response.json();
     if (data.success) {
       listCustomers.value = data.data;
@@ -115,7 +115,7 @@ const fetchCustomers = async () => {
 
 const fetchAccounts = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/accounts');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/accounts');
     const data = await response.json();
     if (data.success) {
       accountOptions.value = data.data;
@@ -138,7 +138,7 @@ const clearFilters = () => {
 const handleDelete = async (ma_khach_hang) => {
   if (confirm('Bạn có chắc chắn muốn xóa khách hàng này không?')) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/khach-hang/delete', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/khach-hang/delete', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

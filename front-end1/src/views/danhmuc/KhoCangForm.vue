@@ -51,7 +51,7 @@ const formData = ref({
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/cang-bien');
+    const response = await fetch('${import.meta.env.VITE_API_URL}/cang-bien');
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_cang) === String(id));
@@ -72,7 +72,7 @@ const fetchDetail = async (id) => {
 const saveData = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/cang-bien/save', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/cang-bien/save', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

@@ -199,8 +199,8 @@ const fetchReferences = async () => {
     const id = route.params.id || '';
     // Gọi đồng thời API references (lấy ID hợp lệ) và API lo-hang (lấy chi tiết đầy đủ cho preview)
     const [refRes, allRes] = await Promise.all([
-      fetch(`http://127.0.0.1:8000/api/luu-bai/references?ma_luu_bai=${id}`),
-      fetch('http://127.0.0.1:8000/api/lo-hang')
+      fetch(`${import.meta.env.VITE_API_URL}/luu-bai/references?ma_luu_bai=${id}`),
+      fetch('${import.meta.env.VITE_API_URL}/lo-hang')
     ]);
     
     const refData = await refRes.json();
@@ -220,7 +220,7 @@ const fetchReferences = async () => {
 };
 
 const fetchDetail = async (id) => {
-  const res = await fetch('http://127.0.0.1:8000/api/luu-bai');
+  const res = await fetch('${import.meta.env.VITE_API_URL}/luu-bai');
   const data = await res.json();
   if (data.success) {
     const found = data.data.find(x => String(x.ma_luu_bai) === String(id));
@@ -240,7 +240,7 @@ const saveData = async () => {
   formData.value.nguoi_sua_cuoi = user ? (user.id || user.ma_tai_khoan) : null;
 
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/luu-bai/save', {
+    const res = await fetch('${import.meta.env.VITE_API_URL}/luu-bai/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData.value)
