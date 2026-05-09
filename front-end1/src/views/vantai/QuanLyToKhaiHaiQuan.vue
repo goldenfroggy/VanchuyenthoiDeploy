@@ -191,7 +191,7 @@ const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.v
 const fetchData = async () => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/to-khai-hai-quan');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/to-khai-hai-quan`);
     const data = await response.json();
     if (data.success) {
       listToKhai.value = data.data;
@@ -243,7 +243,7 @@ watch([searchFilters, pageSize], () => {
 const handleDelete = async (id) => {
   if (confirm('Bạn có chắc chắn muốn xóa tờ khai này không?')) {
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/to-khai-hai-quan/delete', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/to-khai-hai-quan/delete`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ma_to_khai_hai_quan: id })

@@ -343,8 +343,8 @@ const fetchData = async () => {
   isLoading.value = true;
   try {
     const [resDoc, resLoHang] = await Promise.all([
-      fetch('${import.meta.env.VITE_API_URL}/chung-tu'),
-      fetch('${import.meta.env.VITE_API_URL}/lo-hang')
+      fetch(`${import.meta.env.VITE_API_URL}/chung-tu`),
+      fetch(`${import.meta.env.VITE_API_URL}/lo-hang`)
     ]);
     const dataDoc = await resDoc.json();
     const dataLoHang = await resLoHang.json();
@@ -423,7 +423,7 @@ const saveDoc = async () => {
   }
 
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/chung-tu/save', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chung-tu/save`, {
       method: 'POST',
       body: payload
     });
@@ -444,7 +444,7 @@ const saveDoc = async () => {
 const handleDelete = async (id) => {
   if (!confirm("Hủy vĩnh viễn chứng từ này khỏi hệ thống?")) return;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/chung-tu/delete', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/chung-tu/delete`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ma_chung_tu: id })

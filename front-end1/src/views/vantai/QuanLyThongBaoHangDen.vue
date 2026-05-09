@@ -169,7 +169,7 @@ const viewDetail = (type, item) => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/lenh-giao-hang');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lenh-giao-hang`);
     const data = await res.json();
     if (data.success) {
       listAN.value = data.data_an; // Chỉ hứng cục data_an
@@ -194,7 +194,7 @@ const saveData = async () => {
   isSaving.value = true;
   try {
     const payload = { ...formData.value, loai: 'AN' }; // Gắn chết cứng loại là AN
-    const res = await fetch('${import.meta.env.VITE_API_URL}/lenh-giao-hang/save', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lenh-giao-hang/save`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
     if ((await res.json()).success) { isModalOpen.value = false; fetchData(); }
@@ -204,7 +204,7 @@ const saveData = async () => {
 const handleDelete = async (id) => {
   if (!confirm(`Hủy vĩnh viễn phiếu này?`)) return;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/lenh-giao-hang/delete', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lenh-giao-hang/delete`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ma_phieu: id, loai: 'AN' })
     });
     if ((await res.json()).success) fetchData();

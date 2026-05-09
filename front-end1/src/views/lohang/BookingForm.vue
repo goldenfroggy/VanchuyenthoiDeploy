@@ -118,7 +118,7 @@ const formatForInput = (dateString) => {
 
 const loadReferences = async () => {
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/bookings/references');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/bookings/references`);
     const data = await res.json();
     if (data.success) {
       listCangBien.value = data.cang_bien;
@@ -131,7 +131,7 @@ const loadReferences = async () => {
 
 const fetchBookingData = async (id) => {
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/bookings');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/bookings`);
     const data = await res.json();
     if (data.success) {
       const found = data.data.find(x => String(x.ma_booking) === String(id));
@@ -189,7 +189,7 @@ const handleSave = async () => {
   formData.value.nguoi_sua_cuoi = user ? (user.id || user.ma_tai_khoan) : null;
 
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/bookings/save', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/bookings/save`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData.value)

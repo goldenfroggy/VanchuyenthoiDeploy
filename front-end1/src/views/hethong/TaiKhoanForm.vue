@@ -72,7 +72,7 @@ const formData = ref({
 
 const fetchData = async (id) => {
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/accounts');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/accounts`);
     const data = await response.json();
     if (data.success) {
       const acc = data.data.find(x => String(x.ma_tai_khoan) === String(id));
@@ -92,7 +92,7 @@ const fetchData = async (id) => {
 const saveAccount = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/accounts/save', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/accounts/save`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

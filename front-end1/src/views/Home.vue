@@ -115,7 +115,7 @@ const fetchData = async () => {
     alerts.value = []; // Reset danh sách nhắc nhở trước khi tải
 
     // 1. Lấy dữ liệu Lô Hàng
-    const resLH = await fetch('${import.meta.env.VITE_API_URL}/lo-hang');
+    const resLH = await fetch(`${import.meta.env.VITE_API_URL}/lo-hang`);
     const dataLH = await resLH.json();
     
     if (dataLH.success) {
@@ -140,7 +140,7 @@ const fetchData = async () => {
     }
 
     // 2. Lấy dữ liệu Booking để tính toán lịch Closing
-    const resBK = await fetch('${import.meta.env.VITE_API_URL}/bookings');
+    const resBK = await fetch(`${import.meta.env.VITE_API_URL}/bookings`);
     const dataBK = await resBK.json();
     
     if (dataBK.success) {

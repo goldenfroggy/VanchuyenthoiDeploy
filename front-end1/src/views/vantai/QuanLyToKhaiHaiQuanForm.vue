@@ -207,7 +207,7 @@ const selectLoHang = (lh) => {
 
 const fetchReferences = async (ma_to_khai = null) => {
   try {
-    let url = '${import.meta.env.VITE_API_URL}/to-khai-hai-quan/references';
+    let url = `${import.meta.env.VITE_API_URL}/to-khai-hai-quan/references`;
     if (ma_to_khai) {
       url += `?ma_to_khai_hai_quan=${ma_to_khai}`;
     }
@@ -215,7 +215,7 @@ const fetchReferences = async (ma_to_khai = null) => {
     // Gọi đồng thời API references (để lấy danh sách ID hợp lệ) và API lo-hang (để lấy chi tiết đầy đủ)
     const [refRes, allRes] = await Promise.all([
       fetch(url),
-      fetch('${import.meta.env.VITE_API_URL}/lo-hang')
+      fetch(`${import.meta.env.VITE_API_URL}/lo-hang`)
     ]);
     
     const refData = await refRes.json();
@@ -237,7 +237,7 @@ const fetchReferences = async (ma_to_khai = null) => {
 const fetchDetail = async (id) => {
   isLoadingData.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/to-khai-hai-quan');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/to-khai-hai-quan`);
     const data = await response.json();
     if (data.success) {
       const found = data.data.find(item => String(item.ma_to_khai_hai_quan) === String(id));
@@ -270,7 +270,7 @@ const saveToKhai = async () => {
   formData.value.nguoi_sua_cuoi = user ? (user.id || user.ma_tai_khoan) : null;
   
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/to-khai-hai-quan/save', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/to-khai-hai-quan/save`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData.value)

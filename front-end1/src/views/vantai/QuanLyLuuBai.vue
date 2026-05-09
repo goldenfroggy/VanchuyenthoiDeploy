@@ -234,7 +234,7 @@ watch([searchQuery, filterTrangThai, filterCuocVo, filterUser, pageSize], () => 
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/luu-bai');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/luu-bai`);
     const data = await res.json();
     if (data.success) listLuuBai.value = data.data;
   } catch (e) { console.error(e); }
@@ -244,7 +244,7 @@ const fetchData = async () => {
 const handleDelete = async (id) => {
   if (!confirm("Xác nhận xóa thông tin này?")) return;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/luu-bai/delete', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/luu-bai/delete`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ma_luu_bai: id })

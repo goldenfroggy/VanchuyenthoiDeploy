@@ -266,7 +266,7 @@ const handlePrintPDF = (id) => {
 const fetchData = async () => {
   isLoading.value = true;
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/van-don`);
     const data = await res.json();
     if (data.success) listVanDon.value = data.data;
   } catch (error) { console.error("Lỗi lấy dữ liệu Vận đơn!"); }
@@ -275,7 +275,7 @@ const fetchData = async () => {
 
 const fetchReferences = async () => {
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don/references');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/van-don/references`);
     const data = await res.json();
     if (data.success) {
       listCangBien.value = data.cang_bien;
@@ -289,7 +289,7 @@ const handleDelete = async (id) => {
   if (!confirm("Bạn có chắc muốn xóa vận đơn này?")) return;
   const user = JSON.parse(localStorage.getItem('sincere_user'));
   try {
-    const res = await fetch('${import.meta.env.VITE_API_URL}/van-don/delete', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/van-don/delete`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ma_van_don: id, nguoi_sua_cuoi: user ? (user.id || user.ma_tai_khoan) : null })

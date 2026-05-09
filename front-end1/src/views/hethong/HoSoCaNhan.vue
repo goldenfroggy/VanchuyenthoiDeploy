@@ -145,7 +145,7 @@ const openEditModal = () => {
 const saveProfile = async () => {
   isSaving.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/profile/update', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/update`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editData.value)
@@ -182,7 +182,7 @@ const handleChangePassword = async () => {
 
   isSaving.value = true;
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/profile/change-password', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/profile/change-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
